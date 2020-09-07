@@ -8,14 +8,12 @@
 #define GAME_WINDOW_BAR		0	//タイトルバーはデフォルトにする
 #define GAME_WINDOW_NAME	"GAME TITLE"	//ウィンドウのタイトル
 
-//▼▼▼▼▼ プログラム追加ここから ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 //MOVIEフォルダと、mp4ファイルも、追加して下さい
 #define MOVIE_PATH			".\\MOVIE\\ネコ.mp4"	//動画のパス
 
 int handle = -1;	//動画のハンドル
 
-//▲▲▲▲▲ プログラム追加ここまで ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 //########## プログラムで最初に実行される関数 ##########
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
@@ -29,12 +27,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	if (DxLib_Init() == -1) { return -1; }	//ＤＸライブラリ初期化処理
 
-	//▼▼▼▼▼ プログラム追加ここから ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 	//動画の読み込み
 	handle = LoadGraph(MOVIE_PATH);
 
-	//▲▲▲▲▲ プログラム追加ここまで ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 	//無限ループ
 	while (TRUE)
@@ -42,7 +38,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (ProcessMessage() != 0) { break; }	//メッセージ処理の結果がエラーのとき、強制終了
 		if (ClearDrawScreen() != 0) { break; }	//画面を消去できなかったとき、強制終了
 
-		//▼▼▼▼▼ プログラム追加ここから ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 		if (GetMovieStateToGraph(handle) == 0)
 		{
@@ -56,7 +51,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//動画が切れないようにしたい！
 		DrawExtendGraph(0, 0, GAME_WIDTH, GAME_HEIGHT, handle, FALSE);
 
-		//▲▲▲▲▲ プログラム追加ここまで ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 
 		DrawString(0, 0, "動画を再生しています・・・", GetColor(255, 255, 255));
@@ -66,11 +60,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	DxLib_End();	//ＤＸライブラリ使用の終了処理
 
-	//▼▼▼▼▼ プログラム追加ここから ▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼▼
 
 	DeleteGraph(handle);	//動画の削除
 
-	//▲▲▲▲▲ プログラム追加ここまで ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲
 
 	return 0;
 }
